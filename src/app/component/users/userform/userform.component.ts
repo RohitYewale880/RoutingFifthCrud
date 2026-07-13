@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ICanDeactivate } from 'src/app/modals/Deactivate';
 import { Iuser } from 'src/app/modals/product';
 import { SnakbarService } from 'src/app/services/snakbar.service';
 import { UserService } from 'src/app/services/user.service';
+import { GetconfirmComponent } from '../../getconfirm/getconfirm.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-userform',
   templateUrl: './userform.component.html',
   styleUrls: ['./userform.component.scss']
 })
-export class UserformComponent implements OnInit {
-isInEditMode: boolean = false
+export class UserformComponent implements OnInit, ICanDeactivate {
+  isInEditMode: boolean = false
   userForm !: FormGroup
   edituser !: Iuser
   userId !: string
@@ -19,7 +23,8 @@ isInEditMode: boolean = false
   constructor(private userservice: UserService,
     private snackbar: SnakbarService,
     private router: Router,
-    private routes: ActivatedRoute
+    private routes: ActivatedRoute,
+    private _matdilog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -50,7 +55,7 @@ isInEditMode: boolean = false
           let CurrentAdd = this.formcontrols['address'].get('current')?.value;
           this.formcontrols['address'].get('permanent')?.patchValue(CurrentAdd)
           this.formcontrols['address'].get('permanent')?.disable()
-        }else if(this.isInEditMode && !val){
+        } else if (this.isInEditMode && !val) {
           this.formcontrols['address'].get('permanent')?.patchValue(this.edituser.address.permanent)
           this.formcontrols['address'].get('permanent')?.enable()
         }
@@ -112,7 +117,7 @@ isInEditMode: boolean = false
           next: res => {
             this.snackbar.OpenSnakbar(res.msg)
             this.router.navigate(['/users', res.data.userId], {
-              queryParams : {userRole : res.data.userRole}
+              queryParams: { userRole: res.data.userRole }
             });
           },
           error: err => {
@@ -122,7 +127,7 @@ isInEditMode: boolean = false
     }
   }
 
-  onskillremove(i : number){
+  onskillremove(i: number) {
     this.skillsArr.removeAt(i)
   }
 
@@ -134,7 +139,7 @@ isInEditMode: boolean = false
           this.edituser = res
           this.isInEditMode = true
           this.userForm.patchValue(this.edituser)
-          if(res.userRole === 'Candidate'){
+          if (res.userRole === 'Candidate') {
             this.userForm.disable()
           }
           this.skillsArr.clear()
@@ -147,7 +152,7 @@ isInEditMode: boolean = false
     }
   }
 
-  Updateuser(){
+  Updateuser() {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched()
     } else {
@@ -157,7 +162,7 @@ isInEditMode: boolean = false
           next: res => {
             this.snackbar.OpenSnakbar(res.msg)
             this.router.navigate(['/users', res.data.userId], {
-              queryParams : {userRole : res.data.userRole}
+              queryParams: { userRole: res.data.userRole }
             });
           },
           error: err => {
@@ -166,4 +171,15 @@ isInEditMode: boolean = false
         })
     }
   }
+
+    canDeactivate(): Observable<boolean> | boolean {
+      if (!this.userForm.dirty || !this.isInEditMode) {
+        return true
+      }
+      return this._matdilog.open(GetconfirmComponent, {
+        width: '450px',
+        disableClose: true,
+        data: `Are you sure do you want to discard this changess...`
+      }).afterClosed();
+    }
 }

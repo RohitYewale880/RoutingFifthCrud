@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NavbarComponent implements OnInit {
 
+  userRole !: string | null;
   constructor(
     private userService: UserService,
     private productservice : ProductService,
@@ -20,7 +21,9 @@ export class NavbarComponent implements OnInit {
     private router: Router
   ) { }
   ngOnInit(): void {
-    
+    this.authservice.userRole$.subscribe(role => {
+    this.userRole = role ?? '';
+  });
   }
 
   goToUsers() {

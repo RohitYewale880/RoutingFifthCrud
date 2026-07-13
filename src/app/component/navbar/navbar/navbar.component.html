@@ -1,20 +1,21 @@
 <div class="container-fluid">
   <nav class="navbar-custom px-3">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <a class="navbar-brand fw-bold fs-3" routerLink="">
         NavBar
       </a>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
       <ul class="navbar-menu">
-        <li class="mr-3"><a routerLink="home">Home</a></li>
-        <li class="mr-3">
+        <li class="mr-1"><a routerLink="home">Home</a></li>
+        <li class="mr-1">
           <a (click)="goToUsers()">Users</a>
         </li>
-        <li class="mr-3"><a (click)="goToProduct()">Products</a></li>
-        <li class="mr-3"><a (click)="goToFairs()">Fairs</a></li>
-
-        <button (click)="onLogOut()" mat-raised-button color="warn" class="ml-5">Log Out</button>
+        <li class="mr-1"><a (click)="goToProduct()">Products</a></li>
+        <li class="mr-1"><a (click)="goToFairs()">Fairs</a></li>
+        <li style="color: white;">{{userRole}}
+          <button (click)="onLogOut()" mat-raised-button color="warn" class="ml-2">Log Out</button>
+        </li>
       </ul>
     </div>
   </nav>

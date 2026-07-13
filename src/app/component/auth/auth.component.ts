@@ -52,9 +52,10 @@ export class AuthComponent implements OnInit {
       this.authservice.Login(loginObj).subscribe({
         next : res => {
           this.snakbar.OpenSnakbar(res.message)
-          this.router.navigate(['home'])
           this.authservice.saveToken(res.token)
           this.authservice.saveUserrole(res.userRole)
+          this.router.navigate(['home'],
+          )
         },
         error : err => {
           console.log(err);

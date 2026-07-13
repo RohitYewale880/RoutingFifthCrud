@@ -10,6 +10,9 @@ import { UserformComponent } from './component/users/userform/userform.component
 import { SingleuserComponent } from './component/users/singleuser/singleuser.component';
 import { FairDescriptionComponent } from './component/fairs/fair-description/fair-description.component';
 import { AuthComponent } from './component/auth/auth.component';
+import { AuthGardService } from './services/auth-gard.service';
+import { UserRoleGardService } from './services/user-role-gard.service';
+import { CanDeactivateService } from './services/can-deactivate.service';
 
 const routes: Routes = [
   {
@@ -18,11 +21,20 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate : [AuthGardService, UserRoleGardService],
+    data : {
+      userRole : ['buyer', 'admin', 'superAdmin']
+    }
   },
   {
     path: 'product',
     component: ProductsComponent,
+    canActivate : [UserRoleGardService],
+    canActivateChild : [AuthGardService],
+    data : {
+      userRole : ['buyer', 'admin', 'superAdmin']
+    },
     children: [
       {
         path: 'adduser',
@@ -34,13 +46,18 @@ const routes: Routes = [
       },
       {
         path: ':id/edit',
-        component: ProductformComponent
+        component: ProductformComponent,
+        canDeactivate : [CanDeactivateService]
       }
     ]
   },
   {
     path: 'users',
     component: UsersComponent,
+    canActivate : [AuthGardService, UserRoleGardService],
+    data : {
+      userRole : ['admin', 'superAdmin']
+    },
     children: [
       {
         path: 'userAdd',
@@ -52,13 +69,18 @@ const routes: Routes = [
       },
       {
         path: ':id/edit',
-        component: UserformComponent
+        component: UserformComponent,
+        canDeactivate : [CanDeactivateService]
       }
     ]
   },
   {
     path: 'fairs',
     component: FairsComponent,
+    canActivate : [AuthGardService, UserRoleGardService],
+    data : {
+      userRole : ['superAdmin']
+    },
     children : [
       {
         path : ':id',
