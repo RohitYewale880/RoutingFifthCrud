@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Iuser } from 'src/app/modals/product';
 import { UserService } from 'src/app/services/user.service';
+import { rootCertificates } from 'tls';
 
 @Component({
   selector: 'app-users',
@@ -15,10 +16,13 @@ export class UsersComponent implements OnInit {
     private _userservice: UserService,
     private router: Router,
     private routes: ActivatedRoute
-  ) { }
+  ) {
+    console.log(routes.snapshot.data)
+    this.userdata = routes.snapshot.data['user']
+   }
 
   ngOnInit(): void {
-    this.getdata()
+    // this.getdata()
   }
 
   getdata() {

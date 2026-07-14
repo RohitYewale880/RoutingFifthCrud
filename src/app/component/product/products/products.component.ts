@@ -15,10 +15,13 @@ export class ProductsComponent implements OnInit {
     private productService: ProductService,
     private routes: ActivatedRoute,
     private router: Router
-  ) { }
+  ) { 
+    console.log(this.routes.snapshot.data)
+    this.productdata = this.routes.snapshot.data['product']
+  }
 
   ngOnInit(): void {
-    this.getchdata()
+    // this.getchdata()
   }
 
   getchdata() {

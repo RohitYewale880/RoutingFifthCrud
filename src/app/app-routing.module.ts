@@ -13,6 +13,8 @@ import { AuthComponent } from './component/auth/auth.component';
 import { AuthGardService } from './services/auth-gard.service';
 import { UserRoleGardService } from './services/user-role-gard.service';
 import { CanDeactivateService } from './services/can-deactivate.service';
+import { ProductResolverService } from './services/product.resolver.service';
+import { UserResolverService } from './services/user-resolver.service';
 
 const routes: Routes = [
   {
@@ -30,6 +32,9 @@ const routes: Routes = [
   {
     path: 'product',
     component: ProductsComponent,
+    resolve : {
+      product : ProductResolverService
+    },
     canActivate : [UserRoleGardService],
     canActivateChild : [AuthGardService],
     data : {
@@ -55,6 +60,9 @@ const routes: Routes = [
     path: 'users',
     component: UsersComponent,
     canActivate : [AuthGardService, UserRoleGardService],
+    resolve : {
+      user : UserResolverService
+    },
     data : {
       userRole : ['admin', 'superAdmin']
     },
