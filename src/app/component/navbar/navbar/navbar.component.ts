@@ -13,20 +13,31 @@ import { UserService } from 'src/app/services/user.service';
 export class NavbarComponent implements OnInit {
 
   userRole !: string | null;
+  activeMenu: any;
+
   constructor(
     private userService: UserService,
-    private productservice : ProductService,
-    private fairservice : FairsService,
-    private authservice : AuthService,
+    private productservice: ProductService,
+    private fairservice: FairsService,
+    private authservice: AuthService,
     private router: Router
   ) { }
   ngOnInit(): void {
     this.authservice.userRole$.subscribe(role => {
-    this.userRole = role ?? '';
-  });
+      this.userRole = role ?? '';
+    });
+  }
+
+  isLogin(){
+    return this.authservice.getToken();
+  }
+
+  onHome() {
+    this.activeMenu = 'home';
   }
 
   goToUsers() {
+    this.activeMenu = 'users';
     this.userService.getusers().subscribe(users => {
       if (users.length) {
         this.router.navigate(['/users', users[0].userId], {
@@ -38,25 +49,27 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  goToProduct(){
+  goToProduct() {
+    this.activeMenu = 'products';
     this.productservice.getProducts()
       .subscribe(res => {
-        if(res.length > 0){
+        if (res.length > 0) {
           this.router.navigate(['/product', res[0].pid])
         }
       })
   }
 
-  goToFairs(){
+  goToFairs() {
+    this.activeMenu = 'fairs';
     this.fairservice.getfairsArr()
       .subscribe(res => {
-        if(res.length > 0){
+        if (res.length > 0) {
           this.router.navigate(['/fairs', res[0].fairId])
         }
       })
   }
 
-  onLogOut(){
+  onLogOut() {
     this.authservice.logoutService()
     this.router.navigate([''])
   }

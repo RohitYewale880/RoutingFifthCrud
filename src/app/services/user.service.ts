@@ -11,55 +11,105 @@ export class UserService {
   refreshUsers$ = this.refreshUsers.asObservable();
   UsersDetails: Array<Iuser> = [
     {
-      userName: 'Rohit Yewale',
-      userId: 'EMP101',
-      userRole: 'Candidate',
-      profileDescription: '3 years of experience in Angular development.',
-      profileImage: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
-      skills: ['Angular', 'TypeScript', 'RxJS', 'Bootstrap'],
-      experienceYears: '3 to 5 years',
-      isActive: false,
-      address: {
-        current: {
-          city: 'Pune',
-          state: 'Maharashtra',
-          country: 'India',
-          zipcode: '411001'
-        },
-        permanent: {
-          city: 'Kolhapur',
-          state: 'Maharashtra',
-          country: 'India',
-          zipcode: '416001'
-        }
+    userName: 'Aarav Sharma',
+    userId: 'EMP101',
+    userRole: 'Admin',
+    profileDescription: 'Passionate Angular developer with expertise in modern web applications.',
+    profileImage: 'https://cdn-icons-png.flaticon.com/512/4140/4140048.png',
+    skills: ['Angular', 'TypeScript', 'RxJS', 'SCSS'],
+    experienceYears: '3 to 5 years',
+    isActive: true,
+    address: {
+      current: {
+        city: 'Bengaluru',
+        state: 'Karnataka',
+        country: 'India',
+        zipcode: '560001'
       },
-      isAddSame: false
+      permanent: {
+        city: 'Mysuru',
+        state: 'Karnataka',
+        country: 'India',
+        zipcode: '570001'
+      }
     },
-    {
-      userName: 'Snehal Patil',
-      userId: 'EMP102',
-      userRole: 'Admin',
-      profileDescription: 'Experienced in Angular and responsive UI development.',
-      profileImage: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
-      skills: ['Angular', 'HTML', 'CSS', 'JavaScript'],
-      experienceYears: '5 to 7 years',
-      isActive: true,
-      address: {
-        current: {
-          city: 'Mumbai',
-          state: 'Maharashtra',
-          country: 'India',
-          zipcode: '400001'
-        },
-        permanent: {
-          city: 'Satara',
-          state: 'Maharashtra',
-          country: 'India',
-          zipcode: '415001'
-        }
+    isAddSame: false
+  },
+  {
+    userName: 'Priya Verma',
+    userId: 'EMP102',
+    userRole: 'Candidate',
+    profileDescription: 'Skilled in creating responsive and user-friendly web interfaces.',
+    profileImage: 'https://cdn-icons-png.flaticon.com/512/6997/6997662.png',
+    skills: ['HTML', 'CSS', 'Bootstrap', 'JavaScript'],
+    experienceYears: '1 to 3 years',
+    isActive: true,
+    address: {
+      current: {
+        city: 'Hyderabad',
+        state: 'Telangana',
+        country: 'India',
+        zipcode: '500001'
       },
-      isAddSame: true
-    }
+      permanent: {
+        city: 'Warangal',
+        state: 'Telangana',
+        country: 'India',
+        zipcode: '506002'
+      }
+    },
+    isAddSame: true
+  },
+  {
+    userName: 'Rahul Mehta',
+    userId: 'EMP103',
+    userRole: 'Admin',
+    profileDescription: 'Experienced in Angular, Node.js, and MongoDB development.',
+    profileImage: 'https://cdn-icons-png.flaticon.com/512/4140/4140048.png',
+    skills: ['Angular', 'Node.js', 'Express', 'MongoDB'],
+    experienceYears: '5 to 7 years',
+    isActive: false,
+    address: {
+      current: {
+        city: 'Ahmedabad',
+        state: 'Gujarat',
+        country: 'India',
+        zipcode: '380001'
+      },
+      permanent: {
+        city: 'Surat',
+        state: 'Gujarat',
+        country: 'India',
+        zipcode: '395003'
+      }
+    },
+    isAddSame: false
+  },
+  {
+    userName: 'Neha Kulkarni',
+    userId: 'EMP104',
+    userRole: 'Candidate',
+    profileDescription: 'Focused on building scalable Angular applications with clean architecture.',
+    profileImage: 'https://cdn-icons-png.flaticon.com/512/4140/4140047.png',
+    skills: ['Angular', 'TypeScript', 'REST API', 'Git'],
+    experienceYears: '3 to 5 years',
+    isActive: true,
+    address: {
+      current: {
+        city: 'Chennai',
+        state: 'Tamil Nadu',
+        country: 'India',
+        zipcode: '600001'
+      },
+      permanent: {
+        city: 'Coimbatore',
+        state: 'Tamil Nadu',
+        country: 'India',
+        zipcode: '641001'
+      }
+    },
+    isAddSame: true
+  }
   ];
 
   constructor() { }

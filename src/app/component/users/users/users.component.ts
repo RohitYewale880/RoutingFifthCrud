@@ -19,6 +19,7 @@ export class UsersComponent implements OnInit {
   ) {
     console.log(routes.snapshot.data)
     this.userdata = routes.snapshot.data['user']
+    console.log(this.userdata)
    }
 
   ngOnInit(): void {
