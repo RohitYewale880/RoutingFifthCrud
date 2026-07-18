@@ -143,6 +143,7 @@ export class UserformComponent implements OnInit, ICanDeactivate {
             this.userForm.disable()
           }
           this.skillsArr.clear()
+          
           this.edituser.skills.forEach(ele => {
             let control = new FormControl({
               value: ele,
